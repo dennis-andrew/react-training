@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Titan Watches</title>
+    <link rel="stylesheet" href="tables-and-forms.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Titan Watches</h1>
+      <p>
+        Explore premium wrist watches with clean design and everyday comfort.
+      </p>
+
+      <nav aria-label="Main navigation">
+        <a href="#models">Models</a>
+        <a href="#booking-form">Book Visit</a>
+        <a href="#warranty-form">Warranty</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="models">
+        <h2>Watch Models</h2>
+        <table>
+          <caption>
+            Titan watch collection
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Model</th>
+              <th scope="col">Movement</th>
+              <th scope="col">Strap</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Titan Classic 38</th>
+              <td>Quartz</td>
+              <td>Leather</td>
+              <td>Rs. 2400</td>
+            </tr>
+            <tr>
+              <th scope="row">Titan Steel 41</th>
+              <td>Automatic</td>
+              <td>Steel Bracelet</td>
+              <td>Rs. 4200</td>
+            </tr>
+            <tr>
+              <th scope="row">Titan Sport X</th>
+              <td>Chronograph</td>
+              <td>Silicone</td>
+              <td>Rs. 3600</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="booking-form">
+        <h2>Book a Showroom Visit</h2>
+        <form action="/submit" method="post">
+          <fieldset>
+            <legend>Visit Details</legend>
+
+            <p>
+              <label for="name">Full Name</label><br />
+              <input id="name" name="name" type="text" required />
+            </p>
+
+            <p>
+              <label for="email">Email</label><br />
+              <input id="email" name="email" type="email" required />
+            </p>
+
+            <p>
+              <label for="date">Preferred Date</label><br />
+              <input id="date" name="date" type="date" required />
+            </p>
+
+            <p>
+              <label for="collection">Collection</label><br />
+              <select id="collection" name="collection">
+                <option value="">Choose a collection</option>
+                <option value="classic">Classic</option>
+                <option value="steel">Steel</option>
+                <option value="sport">Sport</option>
+              </select>
+            </p>
+
+            <button type="submit">Book Visit</button>
+          </fieldset>
+        </form>
+      </section>
+
+      <section id="warranty-form">
+        <h2>Warranty Registration</h2>
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Watch Details</legend>
+
+            <p>
+              <label for="owner-name">Owner Name</label><br />
+              <input id="owner-name" name="ownerName" type="text" required />
+            </p>
+
+            <p>
+              <label for="serial-number">Serial Number</label><br />
+              <input
+                id="serial-number"
+                name="serialNumber"
+                type="text"
+                required
+              />
+            </p>
+
+            <p>
+              <label for="purchase-date">Purchase Date</label><br />
+              <input
+                id="purchase-date"
+                name="purchaseDate"
+                type="date"
+                required
+              />
+            </p>
+
+            <p>
+              <label for="phone">Phone Number</label><br />
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="+91 98765 43210"
+              />
+            </p>
+
+            <p>
+              <label for="store-email">Store Email</label><br />
+              <input id="store-email" name="storeEmail" type="email" />
+            </p>
+
+            <p>
+              <label for="website">Store Website</label><br />
+              <input
+                id="website"
+                name="website"
+                type="url"
+                placeholder="https://example.com"
+              />
+            </p>
+
+            <p>
+              <label for="model-number">Model Number</label><br />
+              <input
+                id="model-number"
+                name="modelNumber"
+                type="number"
+                min="1000"
+                max="9999"
+              />
+            </p>
+
+            <p>
+              <label for="search-model">Search Watch Model</label><br />
+              <input
+                id="search-model"
+                name="searchModel"
+                type="search"
+                placeholder="Search model name"
+              />
+            </p>
+
+            <p>
+              <label for="proof">Upload Proof of Purchase</label><br />
+              <input id="proof" name="proof" type="file" />
+            </p>
+
+            <p>
+              <label for="visit-time">Preferred Support Time</label><br />
+              <input id="visit-time" name="visitTime" type="time" />
+            </p>
+
+            <p>
+              <label for="dial-color">Dial Color</label><br />
+              <input
+                id="dial-color"
+                name="dialColor"
+                type="color"
+                value="#1f2a44"
+              />
+            </p>
+
+            <p>Watch Type</p>
+            <p>
+              <input
+                id="type-classic"
+                name="watchType"
+                type="radio"
+                value="classic"
+              />
+              <label for="type-classic">Classic</label>
+            </p>
+            <p>
+              <input
+                id="type-steel"
+                name="watchType"
+                type="radio"
+                value="steel"
+              />
+              <label for="type-steel">Steel</label>
+            </p>
+            <p>
+              <input
+                id="type-sport"
+                name="watchType"
+                type="radio"
+                value="sport"
+              />
+              <label for="type-sport">Sport</label>
+            </p>
+
+            <p>Extra Features</p>
+            <p>
+              <input
+                id="feature-water"
+                name="features"
+                type="checkbox"
+                value="water-resistant"
+              />
+              <label for="feature-water">Water Resistant</label>
+            </p>
+            <p>
+              <input
+                id="feature-chrono"
+                name="features"
+                type="checkbox"
+                value="chronograph"
+              />
+              <label for="feature-chrono">Chronograph</label>
+            </p>
+            <p>
+              <input
+                id="feature-leather"
+                name="features"
+                type="checkbox"
+                value="leather-strap"
+              />
+              <label for="feature-leather">Leather Strap</label>
+            </p>
+
+            <p>
+              <label for="notes">Additional Notes</label><br />
+              <textarea
+                id="notes"
+                name="notes"
+                rows="4"
+                cols="30"
+                placeholder="Add any warranty or watch details"
+              ></textarea>
+            </p>
+
+            <button type="submit">Register Warranty</button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>Titan Watches</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f2f2f2;
+  color: #222;
+}
+
+a {
+  color: blue;
+}
+
+header {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  margin-right: 10px;
+}
+
+section {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #333;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+}
+
+caption {
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: left;
+}
+
+th,
+td {
+  border: 1px solid #999;
+  padding: 8px;
+  text-align: left;
+}
+
+thead th {
+  background-color: #ddd;
+}
+
+form {
+  margin-top: 10px;
+}
+
+fieldset {
+  border: 1px solid #999;
+  padding: 15px;
+  background-color: #fafafa;
+}
+
+legend {
+  font-weight: bold;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+
+input[type="color"] {
+  width: 60px;
+  height: 35px;
+  padding: 2px;
+}
+
+input[type="file"] {
+  width: 100%;
+}
+
+textarea {
+  height: 100px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 16px;
+  border: 1px solid #3d8b40;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+footer {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
