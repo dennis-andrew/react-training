@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffee House</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="brand-block">
+          <p class="brand-kicker">Freshly Brewed Since 2026</p>
+          <p class="brand-name">Coffee House</p>
+        </div>
+        <ul>
+          <li>Home</li>
+          <li>About Us</li>
+          <li>Feedback</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Coffee House</h1>
+      <p>India's favourite caffeine fuelling place</p>
+    </main>
+    <section id="feedback">
+      <h2>What our customers say</h2>
+      <section id="feedback-container">
+        <div class="feedback-card">
+          <article>
+            The cold brew here is smooth, strong, and never bitter. I came in
+            for one cup and ended up staying for the atmosphere, the music, and
+            the warm service.
+          </article>
+          <p>Riya M.</p>
+        </div>
+        <div class="feedback-card">
+          <article>
+            Their cappuccino has the perfect balance of foam and flavor, and
+            every dessert pairs beautifully with the coffee. It feels like my
+            go-to corner for slow evenings and good conversations.
+          </article>
+          <p>Arjun K.</p>
+        </div>
+        <div class="feedback-card">
+          <article>
+            It is the perfect blend of our traditional coffee flavors infused
+            with the best of international ideas that makes this the top spot
+            for coffee lovers like me.
+          </article>
+          <p>dave72</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="menu">
+      <h2>Explore our premium menu</h2>
+      <menu id="menu-container">
+        <div class="menu-item">
+          <img
+            src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=900&q=80"
+            alt="espresso served in a small cup"
+          />
+          <article>
+            <p>Classic Espresso</p>
+            <p>₹ 79.00</p>
+          </article>
+        </div>
+        <div class="menu-item">
+          <img
+            src="https://images.unsplash.com/photo-1561047029-3000c68339ca?auto=format&fit=crop&w=900&q=80"
+            alt="latte with foam art in a ceramic cup"
+          />
+          <article>
+            <p>Vanilla Latte</p>
+            <p>₹ 149.00</p>
+          </article>
+        </div>
+        <div class="menu-item">
+          <img
+            src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=900&q=80"
+            alt="cappuccino topped with cocoa powder"
+          />
+          <article>
+            <p>Hazelnut Cappuccino</p>
+            <p>₹ 159.00</p>
+          </article>
+        </div>
+        <div class="menu-item">
+          <img
+            src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=80"
+            alt="iced coffee in a tall glass"
+          />
+          <article>
+            <p>Cold Brew Float</p>
+            <p>₹ 169.00</p>
+          </article>
+        </div>
+        <div class="menu-item">
+          <img
+            src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=900&q=80"
+            alt="mocha coffee topped with whipped cream"
+          />
+          <article>
+            <p>Dark Mocha Bliss</p>
+            <p>₹ 179.00</p>
+          </article>
+        </div>
+        <div class="menu-item">
+          <img
+            src="https://images.unsplash.com/photo-1522992319-0365e5f11656?auto=format&fit=crop&w=900&q=80"
+            alt="affogato with espresso poured over ice cream"
+          />
+          <article>
+            <p>Caramel Affogato</p>
+            <p>₹ 189.00</p>
+          </article>
+        </div>
+        <div class="menu-item">
+          <img
+            src="https://images.unsplash.com/photo-1494314671902-399b18174975?auto=format&fit=crop&w=900&q=80"
+            alt="freshly brewed filter coffee in a mug"
+          />
+          <article>
+            <p>South Indian Filter Coffee</p>
+            <p>₹ 99.00</p>
+          </article>
+        </div>
+      </menu>
+    </section>
+    <section id="form">
+      <h2>We would love to hear from you!</h2>
+      <p class="form-intro">
+        Share your visit details and let us know how we can make your next cup
+        even better.
+      </p>
+      <form>
+        <div class="two-row">
+          <span>
+            <label for="first-name">First Name</label>
+            <input id="first-name" type="text" required name="first-name" />
+          </span>
+          <span>
+            <label for="last-name">Last Name</label>
+            <input id="last-name" type="text" name="last-name" />
+          </span>
+        </div>
+        <div>
+          <p class="field-title">Select your gender</p>
+          <div class="radio-group">
+            <label class="option-pill" for="gender-male">
+              <input
+                id="gender-male"
+                type="radio"
+                name="gender"
+                value="male"
+                checked
+              />
+              <span>Male</span>
+            </label>
+            <label class="option-pill" for="gender-female">
+              <input id="gender-female" type="radio" name="gender" value="female" />
+              <span>Female</span>
+            </label>
+          </div>
+        </div>
+        <div class="two-row">
+          <span>
+            <label for="email">Email</label>
+            <input id="email" type="email" required name="email" />
+          </span>
+          <span>
+            <label for="phone">Phone No.</label>
+            <input id="phone" type="tel" name="phone" />
+          </span>
+        </div>
+        <div>
+          <label for="source">How did you hear about us?</label>
+          <select id="source" required name="source">
+            <option value="">-- Please Select --</option>
+            <option value="social-media">Social Media</option>
+            <option value="social-media">Friends / Family</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+        <div>
+          <label for="rating"
+            >On a scale of 0 to 10, how would you rate us :)</label
+          >
+          <div class="range-group">
+            <span>0</span>
+            <input
+              id="rating"
+              name="rating"
+              type="range"
+              min="0"
+              max="10"
+              step="1"
+              value="7"
+            />
+            <span>10</span>
+          </div>
+        </div>
+        <div id="textbox">
+          <label for="comments">Additional Comments</label>
+          <textarea
+            id="comments"
+            name="comments"
+            rows="6"
+            cols="50"
+            placeholder="Tell us more about your experience..."
+          ></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+    <footer>
+      <p>Copyright 2026 Coffee House. All rights reserved</p>
+    </footer>
+  </body>
+</html>
