@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dog Gallery</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="hero">
+      <nav>
+        <p class="brand-name">Dog Gallery</p>
+        <button id="load-more-button" type="button">Load More Dogs</button>
+      </nav>
+      <div class="hero-copy">
+        <p class="eyebrow">Daily dose of paws</p>
+        <h1>Random dogs, loaded live from a public API.</h1>
+        <p class="hero-text">
+          Tap the button to fetch a fresh batch and build a simple image gallery
+          with JavaScript.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="gallery-section">
+        <div class="section-heading">
+          <h2>Gallery</h2>
+          <p id="status-text">Loading adorable dogs...</p>
+        </div>
+        <section id="gallery-container"></section>
+      </section>
+    </main>
+  </body>
+</html>
