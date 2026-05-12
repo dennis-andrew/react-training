@@ -3,40 +3,47 @@ const addButton = document.querySelector("#add-button");
 const deleteButton = document.querySelector("#delete-button");
 const inputField = document.querySelector("#new-todo");
 const STORAGE_KEY = "week2Todos";
+let todos = [];
 
-function createTodoItem(todoText, isCompleted = false) {
+function createTodoItem(todo, index) {
     const newItem = document.createElement("li");
     const label = document.createElement("label");
     const input = document.createElement("input");
 
     input.type = "checkbox";
-    input.checked = isCompleted;
+    input.checked = todo.completed;
+    input.dataset.index = index;
 
-    if (isCompleted) {
+    if (todo.completed) {
         label.style.textDecoration = "line-through";
     }
 
     label.append(input);
-    label.append(` ${todoText}`);
+    label.append(` ${todo.text}`);
     newItem.appendChild(label);
     todoList.appendChild(newItem);
 }
 
-function getTodosFromPage() {
-    const todoItems = todoList.querySelectorAll("li");
-
-    return Array.from(todoItems).map(function (item) {
+function getDefaultTodos() {
+    return Array.from(todoList.querySelectorAll("li")).map(function (item) {
         const checkbox = item.querySelector('input[type="checkbox"]');
 
-        return {
+        return  {
             text: item.textContent.trim(),
             completed: checkbox.checked,
         };
     });
 }
 
+function renderTodos() {
+    todoList.innerHTML = "";
+
+    todos.forEach(function (todo, index) {
+        createTodoItem(todo, index);
+    });
+}
+
 function saveTodos() {
-    const todos = getTodosFromPage();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 }
 
@@ -44,14 +51,13 @@ function loadTodos() {
     const savedTodos = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
     if (savedTodos) {
-        todoList.innerHTML = "";
-
-        savedTodos.forEach(function (todo) {
-            createTodoItem(todo.text, todo.completed);
-        });
+        todos = savedTodos;
     } else {
+        todos = getDefaultTodos();
         saveTodos();
     }
+
+    renderTodos();
 }
 
 loadTodos();
@@ -60,28 +66,29 @@ addButton.addEventListener("click", function () {
     const todoText = inputField.value.trim();
 
     if (todoText.length > 0) {
-        createTodoItem(todoText);
+        todos.push({
+            text: todoText,
+            completed: false,
+        });
         saveTodos();
+        renderTodos();
         inputField.value = "";
     }
 });
 
 deleteButton.addEventListener("click", function () {
-    const checkedBoxes = todoList.querySelectorAll('input[type="checkbox"]:checked');
-
-    checkedBoxes.forEach(function (checkbox) {
-        checkbox.closest("li").remove();
+    todos = todos.filter(function (todo) {
+        return !todo.completed;
     });
 
     saveTodos();
+    renderTodos();
 });
 
 todoList.addEventListener("change", function (e) {
-    if (e.target.checked) {
-        e.target.parentElement.style.textDecoration = "line-through";
-    } else {
-        e.target.parentElement.style.textDecoration = "none";
-    }
+    const todoIndex = Number(e.target.dataset.index);
+    todos[todoIndex].completed = e.target.checked;
 
     saveTodos();
+    renderTodos();
 });
