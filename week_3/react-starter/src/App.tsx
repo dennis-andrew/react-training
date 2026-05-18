@@ -1,10 +1,11 @@
+import type { FC } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import SummaryCard from './components/SummaryCard'
 import UserListing from './UserListing'
 
-function App() {
+const App: FC = () => {
   return (
     <>
     <Header></Header>

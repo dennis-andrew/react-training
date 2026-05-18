@@ -1,4 +1,6 @@
-export default function Header() {
+import type { FC } from "react";
+
+const Header: FC = () => {
   return (
     <header>
       <h1>Team Listing</h1>
@@ -7,4 +9,6 @@ export default function Header() {
       </p>
     </header>
   );
-}
+};
+
+export default Header;

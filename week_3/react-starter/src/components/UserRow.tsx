@@ -1,6 +1,11 @@
+import type { FC } from "react";
 import type { User } from "../UserListing";
 
-export default function UserRow({user}: {user:User}) {
+interface UserRowProps {
+  user: User;
+}
+
+const UserRow: FC<UserRowProps> = ({ user }) => {
   return (
     <tr >
       <td>
@@ -26,4 +31,6 @@ export default function UserRow({user}: {user:User}) {
       </td>
     </tr>
   );
-}
+};
+
+export default UserRow;

@@ -1,4 +1,6 @@
-export default function Sidebar() {
+import type { FC } from "react";
+
+const Sidebar: FC = () => {
   return (
     <section id="sidebar">
       <ul>
@@ -9,4 +11,6 @@ export default function Sidebar() {
       </ul>
     </section>
   );
-}
+};
+
+export default Sidebar;

@@ -1,10 +1,12 @@
+import type { FC } from "react";
+
 interface SummaryCardProps {
   label: string;
   value: string;
   note: string;
 }
 
-export default function SummaryCard({ label, value, note }: SummaryCardProps) {
+const SummaryCard: FC<SummaryCardProps> = ({ label, value, note }) => {
   return (
     <article className="summary-card">
       <p>{label}</p>
@@ -12,4 +14,6 @@ export default function SummaryCard({ label, value, note }: SummaryCardProps) {
       <span>{note}</span>
     </article>
   );
-}
+};
+
+export default SummaryCard;

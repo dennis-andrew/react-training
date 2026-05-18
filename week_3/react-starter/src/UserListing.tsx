@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import FilterRow from "./components/FilterRow";
 import UserRow from "./components/UserRow";
 
@@ -20,82 +20,70 @@ export interface User {
   status: UserStatus;
 }
 
-const USER_LIST: User[] = [
-  {
-    id: 1,
-    name: "Dennis Mathew",
-    url: "https://i.pravatar.cc/96?img=12",
-    position: "Junior Developer",
-    department: "Engineering",
-    email: "dennis.mathew@example.com",
-    phone: "+91 98765 43210",
-    status: UserStatus.active,
-  },
-  {
-    id: 2,
-    name: "Aisha Menon",
-    url: "https://i.pravatar.cc/96?img=47",
-    position: "Product Manager",
-    department: "Product",
-    email: "aisha.menon@example.com",
-    phone: "+91 90084 22611",
-    status: UserStatus.active,
-  },
-  {
-    id: 3,
-    name: "Rahul Nair",
-    url: "https://i.pravatar.cc/96?img=15",
-    position: "UX Designer",
-    department: "Design",
-    email: "rahul.nair@example.com",
-    phone: "+91 81234 56789",
-    status: UserStatus.inactive,
-  },
-  {
-    id: 4,
-    name: "Meera Iyer",
-    url: "https://i.pravatar.cc/96?img=32",
-    position: "QA Engineer",
-    department: "Quality",
-    email: "meera.iyer@example.com",
-    phone: "+91 99887 76655",
-    status: UserStatus.active,
-  },
-  {
-    id: 5,
-    name: "Arjun Kapoor",
-    url: "https://i.pravatar.cc/96?img=53",
-    position: "DevOps Engineer",
-    department: "Infrastructure",
-    email: "arjun.kapoor@example.com",
-    phone: "+91 77665 54433",
-    status: UserStatus.inactive,
-  },
-  {
-    id: 6,
-    name: "Sara Thomas",
-    url: "https://i.pravatar.cc/96?img=25",
-    position: "Data Analyst",
-    department: "Analytics",
-    email: "sara.thomas@example.com",
-    phone: "+91 88990 11223",
-    status: UserStatus.active,
-  },
-];
+interface ApiUser {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  company: {
+    bs: string;
+    name: string;
+  };
+}
 
-export default function UserListing() {
+const UserListing: FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
   const [filterText, setFilterText] = useState("");
   const [showActiveUsers, setShowActiveUsers] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  function handleFilter(user: User) {
-    if(showActiveUsers && user.status===UserStatus.inactive){
-        return;
+  const handleFilter = (user: User) => {
+    if (showActiveUsers && user.status === UserStatus.inactive) {
+      return false;
     }
-    if (user.name.toLowerCase().includes(filterText.toLowerCase())) {
-        return user;
-    }
-    
-  }
+
+    const searchValue = filterText.toLowerCase();
+    return (
+      user.name.toLowerCase().includes(searchValue) ||
+      user.email.toLowerCase().includes(searchValue) ||
+      user.department.toLowerCase().includes(searchValue)
+    );
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+        if (!response.ok) {
+          throw new Error("Unable to fetch users");
+        }
+
+        const data: ApiUser[] = await response.json();
+        const userList = data.map((user) => ({
+          id: user.id,
+          name: user.name,
+          url: `https://i.pravatar.cc/96?img=${user.id + 10}`,
+          position: user.company.bs,
+          department: user.company.name,
+          email: user.email,
+          phone: user.phone,
+          status: user.id % 3 === 0 ? UserStatus.inactive : UserStatus.active,
+        }));
+
+        setUsers(userList);
+      } catch {
+        setError("Something went wrong while loading users.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const filteredUsers = users.filter(handleFilter);
 
   return (
     <section className="user-listing">
@@ -117,11 +105,34 @@ export default function UserListing() {
           </tr>
         </thead>
         <tbody>
-          {USER_LIST.filter(handleFilter).map((user) => (
-            <UserRow key={user.id} user={user} />
-          ))}
+          {isLoading && (
+            <tr>
+              <td className="table-message" colSpan={6}>
+                Loading users...
+              </td>
+            </tr>
+          )}
+          {!isLoading && error && (
+            <tr>
+              <td className="table-message error-message" colSpan={6}>
+                {error}
+              </td>
+            </tr>
+          )}
+          {!isLoading && !error && filteredUsers.length === 0 && (
+            <tr>
+              <td className="table-message" colSpan={6}>
+                No users found.
+              </td>
+            </tr>
+          )}
+          {!isLoading &&
+            !error &&
+            filteredUsers.map((user) => <UserRow key={user.id} user={user} />)}
         </tbody>
       </table>
     </section>
   );
-}
+};
+
+export default UserListing;
