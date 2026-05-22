@@ -1,8 +1,9 @@
 import { type FC, useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 const Settings: FC = () => {
   const [emailAlerts, setEmailAlerts] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <section className="page-box">
@@ -23,8 +24,8 @@ const Settings: FC = () => {
         <input
           id="dark-mode"
           type="checkbox"
-          checked={darkMode}
-          onChange={(event) => setDarkMode(event.target.checked)}
+          checked={theme === "dark"}
+          onChange={toggleTheme}
         ></input>
         <label htmlFor="dark-mode">Dark mode</label>
       </div>

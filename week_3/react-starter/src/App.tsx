@@ -10,6 +10,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import SummaryCard from "./components/SummaryCard";
+import { ThemeProvider } from "./context/ThemeContext";
 import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import UserDetails from "./pages/UserDetails";
@@ -86,7 +87,11 @@ const router = createBrowserRouter([
 ]);
 
 const App: FC = () => {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <ThemeProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </ThemeProvider>
+  );
 };
 
 export default App;
