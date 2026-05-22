@@ -1,11 +1,15 @@
 import type { FC } from "react";
 
-const Header: FC = () => {
+interface HeaderProps {
+  title: string;
+}
+
+const Header: FC<HeaderProps> = ({ title }) => {
   return (
     <header>
-      <h1>Team Listing</h1>
+      <h1>{title}</h1>
       <p>
-        <span>Admin Dashboard</span> &gt; <span>Team List</span>
+        <span>Admin Dashboard</span> &gt; <span>{title}</span>
       </p>
     </header>
   );
