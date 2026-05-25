@@ -35,11 +35,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     }
   };
 
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;
 };
 
 export const useTheme = () => {

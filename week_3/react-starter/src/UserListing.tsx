@@ -1,6 +1,7 @@
 import { type FC, useEffect, useState } from "react";
 import FilterRow from "./components/FilterRow";
 import UserRow from "./components/UserRow";
+import useDebouncer from "./hooks/DebounceHook";
 
 const UserStatus = {
   active: "active",
@@ -37,13 +38,14 @@ const UserListing: FC = () => {
   const [showActiveUsers, setShowActiveUsers] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const debouncedText = useDebouncer(filterText, 500);
 
   const handleFilter = (user: User) => {
     if (showActiveUsers && user.status === UserStatus.inactive) {
       return false;
     }
 
-    const searchValue = filterText.toLowerCase();
+    const searchValue = debouncedText.toLowerCase();
     return (
       user.name.toLowerCase().includes(searchValue) ||
       user.email.toLowerCase().includes(searchValue) ||
@@ -54,7 +56,9 @@ const UserListing: FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users",
+        );
 
         if (!response.ok) {
           throw new Error("Unable to fetch users");
