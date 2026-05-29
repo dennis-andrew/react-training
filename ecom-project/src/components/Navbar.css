@@ -1,0 +1,111 @@
+.site-header {
+  background-color: #fff;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 90rem;
+  min-height: 6.25rem;
+  margin: 0 auto;
+  padding: 0 6.25rem 0 3.375rem;
+}
+
+.navbar_brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.navbar_brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar_brand-image {
+  width: 3.125rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+.navbar_actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5625rem;
+}
+
+.navbar_cart-link {
+  position: relative;
+}
+
+.navbar_cart-badge {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  background: #b88e2f;
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.navbar_brand-text {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.125rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.navbar_menu ul {
+  display: flex;
+  align-items: center;
+  gap: 4.6875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.navbar_menu .navlink {
+  color: #000;
+  text-decoration: none;
+}
+
+.navbar_menu .navlink:hover,
+.navbar_menu .navlink:focus-visible {
+  color: #b88e2f;
+}
+
+.navbar_menu .navlink_active {
+  color: #b88e2f;
+}
+
+@media (max-width: 64rem) {
+  .navbar {
+    padding: 0 1.5rem;
+  }
+
+  .navbar_menu {
+    display: none;
+  }
+}
+
+@media (max-width: 36rem) {
+  .navbar_brand-text {
+    font-size: 1.625rem;
+  }
+
+  .navbar_actions {
+    gap: 0.25rem;
+  }
+}

@@ -1,0 +1,19 @@
+.info-page {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+  color: #3a3a3a;
+}
+
+.info-page h2 {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.info-page p {
+  margin: 0 0 0.75rem;
+  color: #616161;
+  font-size: 1rem;
+  line-height: 1.7;
+}

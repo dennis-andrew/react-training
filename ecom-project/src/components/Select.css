@@ -1,0 +1,25 @@
+.select-field {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  color: #3a3a3a;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.select-field select {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0 2.5rem 0 1rem;
+  border: 1px solid #d7c9b7;
+  background-color: #fff;
+  color: #3a3a3a;
+  font: inherit;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.select-field select:focus-visible {
+  outline: 2px solid #b88e2f;
+  outline-offset: 2px;
+}

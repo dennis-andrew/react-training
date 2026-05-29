@@ -1,0 +1,70 @@
+.offer_card {
+  width: min(40.1875rem, calc(100% - 3rem));
+  min-height: 27.6875rem;
+  background-color: #fff3e3;
+  border-radius: 0.625rem;
+  padding: 3.875rem 2.5rem 2.3125rem;
+  color: #333;
+}
+
+.offer_card__eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1875rem;
+  line-height: 1.5;
+}
+
+.offer_card h2 {
+  max-width: 35rem;
+  margin: 0 0 1.0625rem;
+  color: #b88e2f;
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.offer_card__description {
+  max-width: 34rem;
+  margin: 0 0 2.875rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.offer_card__button {
+  min-width: 13.875rem;
+  min-height: 4.625rem;
+  padding: 1.5625rem 4.5rem;
+  border: 0;
+  background-color: #b88e2f;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.offer_card__button:hover {
+  background-color: #9e7724;
+}
+
+.offer_card__button:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 3px;
+}
+
+@media (max-width: 48rem) {
+  .offer_card {
+    min-height: 0;
+    padding: 2.5rem 1.75rem;
+  }
+
+  .offer_card h2 {
+    font-size: clamp(2.25rem, 10vw, 3.25rem);
+  }
+
+  .offer_card__description {
+    margin-bottom: 2rem;
+  }
+}
