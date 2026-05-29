@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import appLogo from "../assets/icons/app_logo.svg";
 import { AccountIcon, CartIcon, HeartIcon, SearchIcon } from "../icons";
 import localStorageService from "../services/localStorageService";
@@ -14,6 +14,10 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(() =>
+    localStorageService.getCurrentUser(),
+  );
   const [cartItemCount, setCartItemCount] = useState(() =>
     localStorageService
       .getCartItems()
@@ -41,6 +45,31 @@ const Navbar = () => {
         updateCartCount,
       );
       window.removeEventListener("storage", updateCartCount);
+    };
+  }, []);
+
+  const logout = () => {
+    localStorageService.logout();
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    const updateCurrentUser = () => {
+      setCurrentUser(localStorageService.getCurrentUser());
+    };
+
+    window.addEventListener(
+      localStorageService.authUpdatedEvent,
+      updateCurrentUser,
+    );
+    window.addEventListener("storage", updateCurrentUser);
+
+    return () => {
+      window.removeEventListener(
+        localStorageService.authUpdatedEvent,
+        updateCurrentUser,
+      );
+      window.removeEventListener("storage", updateCurrentUser);
     };
   }, []);
 
@@ -73,9 +102,18 @@ const Navbar = () => {
         </div>
 
         <div className="navbar_actions">
-          <IconButton label="Open account">
-            <AccountIcon />
-          </IconButton>
+          {currentUser ? (
+            <div className="navbar_user">
+              <span>Hi, {currentUser.name}</span>
+              <button type="button" onClick={logout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <NavLink className="icon-button" to="/login" aria-label="Login">
+              <AccountIcon />
+            </NavLink>
+          )}
           <IconButton label="Search products">
             <SearchIcon />
           </IconButton>

@@ -1,0 +1,169 @@
+.auth-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(28rem, 0.9fr);
+  min-height: 100vh;
+}
+
+.auth-cover {
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem;
+  background:
+    linear-gradient(rgb(0 0 0 / 20%), rgb(0 0 0 / 45%)),
+    url("../assets/background_assets/scandinavian-interior-mockup-wall-decal-background 1.png")
+      center / cover no-repeat;
+  color: #fff;
+}
+
+.auth-cover div {
+  max-width: 34rem;
+}
+
+.auth-cover p {
+  margin: 0 0 0.75rem;
+  color: #f9f1e7;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.auth-cover h1 {
+  margin: 0;
+  font-size: 3rem;
+  line-height: 1.15;
+}
+
+.auth-panel {
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: #fff;
+}
+
+.auth-card {
+  width: min(100%, 32rem);
+  padding: 2rem;
+  background: #f9f1e7;
+}
+
+.auth-card h2 {
+  margin: 0 0 0.5rem;
+  color: #3a3a3a;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.auth-card > p {
+  margin: 0 0 1.5rem;
+  color: #616161;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.auth-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 0.5rem;
+  color: #3a3a3a;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  height: 3.25rem;
+  min-height: 3.25rem;
+  padding: 0 1rem;
+  border: 1px solid #d7c9b7;
+  background: #fff;
+  color: #3a3a3a;
+  font: inherit;
+}
+
+.auth-password-field {
+  display: flex;
+  align-items: stretch;
+}
+
+.auth-password-field input {
+  flex: 1;
+  border-right: 0;
+}
+
+.auth-password-field button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 3.25rem;
+  height: 3.25rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #d7c9b7;
+  border-left: 0;
+  background: #fff;
+  color: #b88e2f;
+}
+
+.auth-password-field button svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.auth-password-field button:hover {
+  background: #fff;
+  color: #8f6b22;
+}
+
+.auth-form > button {
+  min-height: 3.25rem;
+  margin-top: 0.5rem;
+  border: 1px solid #b88e2f;
+  background: #b88e2f;
+  color: #fff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-form > button:hover {
+  background: #fff;
+  color: #b88e2f;
+}
+
+.auth-message {
+  margin: 1rem 0 0;
+  color: #b85c38;
+  font-size: 0.9375rem;
+}
+
+.auth-switch {
+  margin: 1.5rem 0 0;
+  color: #616161;
+  font-size: 1rem;
+}
+
+.auth-switch a {
+  color: #b88e2f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (max-width: 54rem) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-cover {
+    min-height: 18rem;
+    padding: 2rem;
+  }
+
+  .auth-cover h1 {
+    font-size: 2rem;
+  }
+}
