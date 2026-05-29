@@ -73,7 +73,7 @@ const Signup = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   required
-                  minLength={4}
+                  minLength={8}
                   value={password}
                   placeholder="Create password"
                   onChange={(event) => setPassword(event.target.value)}
@@ -110,7 +110,14 @@ const EyeOpenIcon = () => (
       stroke="currentColor"
       strokeWidth="1.8"
     />
-    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="1.8" />
+    <circle
+      cx="12"
+      cy="12"
+      r="3"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    />
   </svg>
 );
 
