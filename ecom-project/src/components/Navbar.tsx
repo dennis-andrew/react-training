@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import appLogo from "../assets/icons/app_logo.svg";
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
 import { AccountIcon, CartIcon, HeartIcon, SearchIcon } from "../icons";
-import localStorageService from "../services/localStorageService";
 import IconButton from "./IconButton";
 import "./Navbar.css";
 
@@ -15,63 +15,17 @@ const navLinks = [
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(() =>
-    localStorageService.getCurrentUser(),
+  const { currentUser, logout: logoutUser } = useAuth();
+  const { cartItems } = useCart();
+  const cartItemCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
   );
-  const [cartItemCount, setCartItemCount] = useState(() =>
-    localStorageService
-      .getCartItems()
-      .reduce((total, item) => total + item.quantity, 0),
-  );
-
-  useEffect(() => {
-    const updateCartCount = () => {
-      setCartItemCount(
-        localStorageService
-          .getCartItems()
-          .reduce((total, item) => total + item.quantity, 0),
-      );
-    };
-
-    window.addEventListener(
-      localStorageService.cartItemsUpdatedEvent,
-      updateCartCount,
-    );
-    window.addEventListener("storage", updateCartCount);
-
-    return () => {
-      window.removeEventListener(
-        localStorageService.cartItemsUpdatedEvent,
-        updateCartCount,
-      );
-      window.removeEventListener("storage", updateCartCount);
-    };
-  }, []);
 
   const logout = () => {
-    localStorageService.logout();
+    logoutUser();
     navigate("/login");
   };
-
-  useEffect(() => {
-    const updateCurrentUser = () => {
-      setCurrentUser(localStorageService.getCurrentUser());
-    };
-
-    window.addEventListener(
-      localStorageService.authUpdatedEvent,
-      updateCurrentUser,
-    );
-    window.addEventListener("storage", updateCurrentUser);
-
-    return () => {
-      window.removeEventListener(
-        localStorageService.authUpdatedEvent,
-        updateCurrentUser,
-      );
-      window.removeEventListener("storage", updateCurrentUser);
-    };
-  }, []);
 
   return (
     <header className="site-header">
@@ -104,7 +58,7 @@ const Navbar = () => {
         <div className="navbar_actions">
           {currentUser ? (
             <div className="navbar_user">
-              <span>Hi, {currentUser.name}</span>
+              <span>Hi, {currentUser.username || currentUser.email}</span>
               <button type="button" onClick={logout}>
                 Logout
               </button>

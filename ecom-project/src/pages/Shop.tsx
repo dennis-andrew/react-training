@@ -32,13 +32,12 @@ const Shop = () => {
   const debouncedSearchTerm = useDebouncer(searchTerm);
   const debouncedMaximumPrice = useDebouncer(maximumPrice);
   const debouncedCategories = useDebouncer(selectedCategories);
-  const normalizedSearch = debouncedSearchTerm.trim().toLowerCase();
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
-      normalizedSearch.length === 0 ||
-      product.name.toLowerCase().includes(normalizedSearch) ||
-      product.color.toLowerCase().includes(normalizedSearch);
+      debouncedSearchTerm.length === 0 ||
+      product.name.includes(debouncedSearchTerm) ||
+      product.color.includes(debouncedSearchTerm);
     const matchesPrice = product.price <= debouncedMaximumPrice;
     const matchesCategory =
       debouncedCategories.length === 0 ||

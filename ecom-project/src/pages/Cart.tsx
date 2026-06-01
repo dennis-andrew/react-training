@@ -1,17 +1,14 @@
 import { useState } from "react";
 import PageHeader from "../components/PageHeader";
-import type { CartItem } from "../data/cartItems";
+import useCart from "../hooks/useCart";
 import type { Product } from "../data/products";
-import localStorageService from "../services/localStorageService";
 import formatPrice from "../utils";
 import "./Cart.css";
 
 const Cart = () => {
-  const [items, setItems] = useState<CartItem[]>(
-    localStorageService.getCartItems,
-  );
+  const { cartItems, removeCartItem } = useCart();
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
-  const cartTotal = items.reduce(
+  const cartTotal = cartItems.reduce(
     (total, item) => total + item.product.price * item.quantity,
     0,
   );
@@ -21,14 +18,7 @@ const Cart = () => {
       return;
     }
 
-    setItems((currentItems) => {
-      const updatedItems = currentItems.filter(
-        (item) => item.product.id !== productToDelete.id,
-      );
-
-      localStorageService.saveCartItems(updatedItems);
-      return updatedItems;
-    });
+    removeCartItem(productToDelete.id);
     setProductToDelete(null);
   };
 
@@ -44,7 +34,7 @@ const Cart = () => {
             <span>Subtotal</span>
           </div>
 
-          {items.map(({ product, quantity }) => (
+          {cartItems.map(({ product, quantity }) => (
             <article className="cart-item" key={product.id}>
               <div className="cart-item__product">
                 <img src={product.imageUrl} alt={product.name} />
@@ -66,7 +56,7 @@ const Cart = () => {
             </article>
           ))}
 
-          {items.length === 0 && (
+          {cartItems.length === 0 && (
             <p className="cart-page__empty">Your cart is empty.</p>
           )}
         </section>

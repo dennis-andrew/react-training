@@ -1,33 +1,48 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import localStorageService from "../services/localStorageService";
+import useAuth from "../hooks/useAuth";
 import "./Auth.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  const { currentUser, signUp } = useAuth();
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [gender, setGender] = useState("");
+  const [address, setAddress] = useState("");
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const canSignup =
+    username.length > 0 &&
+    email.length > 0 &&
+    password.length >= 8 &&
+    gender.length > 0;
 
   useEffect(() => {
-    if (localStorageService.getCurrentUser()) {
+    if (currentUser) {
       navigate("/");
     }
-  }, [navigate]);
+  }, [currentUser, navigate]);
 
   const submitSignup = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const result = localStorageService.signUp(name, email, password);
+    const result = signUp(
+      username,
+      email,
+      password,
+      gender,
+      address,
+    );
 
     if (!result.ok) {
       setMessage(result.message);
       return;
     }
 
-    navigate("/shop");
+    setMessage("Signup successful. Redirecting...");
+    window.setTimeout(() => navigate("/"), 1000);
   };
 
   return (
@@ -46,13 +61,13 @@ const Signup = () => {
 
           <form className="auth-form" onSubmit={submitSignup}>
             <label>
-              Name
+              Username
               <input
                 type="text"
                 required
-                value={name}
-                placeholder="Your name"
-                onChange={(event) => setName(event.target.value)}
+                value={username}
+                placeholder="Choose username"
+                onChange={(event) => setUsername(event.target.value)}
               />
             </label>
 
@@ -64,6 +79,31 @@ const Signup = () => {
                 value={email}
                 placeholder="you@example.com"
                 onChange={(event) => setEmail(event.target.value)}
+              />
+            </label>
+
+            <label>
+              Gender
+              <select
+                required
+                value={gender}
+                onChange={(event) => setGender(event.target.value)}
+              >
+                <option value="">Select gender</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="non-binary">Non-binary</option>
+                <option value="prefer-not-to-say">Prefer not to say</option>
+              </select>
+            </label>
+
+            <label>
+              Address
+              <textarea
+                value={address}
+                placeholder="Enter address (optional)"
+                rows={3}
+                onChange={(event) => setAddress(event.target.value)}
               />
             </label>
 
@@ -88,7 +128,9 @@ const Signup = () => {
               </div>
             </label>
 
-            <button type="submit">Signup</button>
+            <button type="submit" disabled={!canSignup}>
+              Signup
+            </button>
           </form>
 
           {message && <p className="auth-message">{message}</p>}

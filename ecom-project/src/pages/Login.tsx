@@ -1,32 +1,34 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import localStorageService from "../services/localStorageService";
+import useAuth from "../hooks/useAuth";
 import "./Auth.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const { currentUser, login } = useAuth();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (localStorageService.getCurrentUser()) {
+    if (currentUser) {
       navigate("/");
     }
-  }, [navigate]);
+  }, [currentUser, navigate]);
 
   const submitLogin = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const result = localStorageService.login(email, password);
+    const result = login(username, password);
 
     if (!result.ok) {
       setMessage(result.message);
       return;
     }
 
-    navigate("/shop");
+    setMessage("Login successful. Redirecting...");
+    window.setTimeout(() => navigate("/"), 1000);
   };
 
   return (
@@ -45,13 +47,13 @@ const Login = () => {
 
           <form className="auth-form" onSubmit={submitLogin}>
             <label>
-              Email
+              Username
               <input
-                type="email"
+                type="text"
                 required
-                value={email}
-                placeholder="you@example.com"
-                onChange={(event) => setEmail(event.target.value)}
+                value={username}
+                placeholder="Enter username"
+                onChange={(event) => setUsername(event.target.value)}
               />
             </label>
 

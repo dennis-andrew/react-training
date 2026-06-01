@@ -1,6 +1,4 @@
-import { cartItems } from "../data/cartItems";
 import type { CartItem } from "../data/cartItems";
-import type { Product } from "../data/products";
 
 export type CustomerReview = {
   id: number;
@@ -12,17 +10,17 @@ export type CustomerReview = {
 
 export type User = {
   id: number;
-  name: string;
+  username: string;
   email: string;
   password: string;
+  gender: string;
+  address: string;
 };
 
 const CUSTOMER_REVIEWS_KEY = "furniro_customer_reviews";
-const CART_ITEMS_KEY = "furniro_cart_items";
-const CART_ITEMS_UPDATED_EVENT = "furniro_cart_items_updated";
+const CART_ITEMS_KEY_PREFIX = "furniro_cart_items";
 const USERS_KEY = "furniro_users";
 const CURRENT_USER_KEY = "furniro_current_user";
-const AUTH_UPDATED_EVENT = "furniro_auth_updated";
 
 const getCustomerReviews = () => {
   const storedReviews = localStorage.getItem(CUSTOMER_REVIEWS_KEY);
@@ -42,40 +40,32 @@ const saveCustomerReviews = (reviews: CustomerReview[]) => {
   localStorage.setItem(CUSTOMER_REVIEWS_KEY, JSON.stringify(reviews));
 };
 
-const getCartItems = () => {
-  const storedItems = localStorage.getItem(CART_ITEMS_KEY);
+const getCartItemsKey = () => {
+  const currentUser = getCurrentUser();
+
+  if (!currentUser) {
+    return `${CART_ITEMS_KEY_PREFIX}_guest`;
+  }
+
+  return `${CART_ITEMS_KEY_PREFIX}_${currentUser.id}`;
+};
+
+const getCartItems = (): CartItem[] => {
+  const storedItems = localStorage.getItem(getCartItemsKey());
 
   if (!storedItems) {
-    return cartItems;
+    return [];
   }
 
   try {
     return JSON.parse(storedItems) as CartItem[];
   } catch {
-    return cartItems;
+    return [];
   }
 };
 
 const saveCartItems = (items: CartItem[]) => {
-  localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(items));
-  window.dispatchEvent(new Event(CART_ITEMS_UPDATED_EVENT));
-};
-
-const addCartItem = (product: Product, quantity: number) => {
-  const currentItems = getCartItems();
-  const existingItem = currentItems.find(
-    (item) => item.product.id === product.id,
-  );
-
-  const updatedItems = existingItem
-    ? currentItems.map((item) =>
-        item.product.id === product.id
-          ? { ...item, quantity: item.quantity + quantity }
-          : item,
-      )
-    : [...currentItems, { product, quantity }];
-
-  saveCartItems(updatedItems);
+  localStorage.setItem(getCartItemsKey(), JSON.stringify(items));
 };
 
 const getUsers = () => {
@@ -116,24 +106,34 @@ const setCurrentUser = (user: User | null) => {
   } else {
     localStorage.removeItem(CURRENT_USER_KEY);
   }
-
-  window.dispatchEvent(new Event(AUTH_UPDATED_EVENT));
 };
 
-const signUp = (name: string, email: string, password: string) => {
+const signUp = (
+  username: string,
+  email: string,
+  password: string,
+  gender: string,
+  address: string,
+) => {
   const users = getUsers();
-  const normalizedEmail = email.trim().toLowerCase();
-  const existingUser = users.find((user) => user.email === normalizedEmail);
+  const existingUser = users.find(
+    (user) => user.email === email || user.username === username,
+  );
 
   if (existingUser) {
-    return { ok: false, message: "An account with this email already exists." };
+    return {
+      ok: false,
+      message: "An account with this username or email already exists.",
+    };
   }
 
   const newUser = {
     id: Date.now(),
-    name: name.trim(),
-    email: normalizedEmail,
+    username,
+    email,
     password,
+    gender,
+    address,
   };
 
   saveUsers([...users, newUser]);
@@ -142,15 +142,14 @@ const signUp = (name: string, email: string, password: string) => {
   return { ok: true, message: "Signup successful." };
 };
 
-const login = (email: string, password: string) => {
-  const normalizedEmail = email.trim().toLowerCase();
+const login = (username: string, password: string) => {
   const user = getUsers().find(
     (storedUser) =>
-      storedUser.email === normalizedEmail && storedUser.password === password,
+      storedUser.username === username && storedUser.password === password,
   );
 
   if (!user) {
-    return { ok: false, message: "Invalid email or password." };
+    return { ok: false, message: "Invalid username or password." };
   }
 
   setCurrentUser(user);
@@ -163,9 +162,6 @@ const logout = () => {
 };
 
 const localStorageService = {
-  addCartItem,
-  authUpdatedEvent: AUTH_UPDATED_EVENT,
-  cartItemsUpdatedEvent: CART_ITEMS_UPDATED_EVENT,
   getCurrentUser,
   getCustomerReviews,
   getCartItems,

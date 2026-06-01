@@ -1,6 +1,6 @@
 import { useState } from "react";
+import useCart from "../hooks/useCart";
 import type { Product } from "../data/products";
-import localStorageService from "../services/localStorageService";
 import formatPrice from "../utils";
 import "./ProductDetailsOverlay.css";
 
@@ -14,9 +14,10 @@ const ProductDetailsOverlay = ({
   onClose,
 }: ProductDetailsOverlayProps) => {
   const [quantity, setQuantity] = useState(1);
+  const { addCartItem } = useCart();
 
   const addToCart = () => {
-    localStorageService.addCartItem(product, quantity);
+    addCartItem(product, quantity);
     onClose();
   };
 

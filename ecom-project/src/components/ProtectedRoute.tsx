@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import localStorageService from "../services/localStorageService";
+import useAuth from "../hooks/useAuth";
 
 type ProtectedRouteProps = {
   children: ReactNode;
 };
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const currentUser = localStorageService.getCurrentUser();
+  const { currentUser } = useAuth();
 
   if (!currentUser) {
     return <Navigate replace to="/login" />;

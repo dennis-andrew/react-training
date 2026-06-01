@@ -12,8 +12,8 @@ const OfferCard = () => {
         New Collection
       </h2>
       <p className="offer_card__description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-        luctus nec ullamcorper mattis.
+        Bring home thoughtfully crafted furniture designed for comfort, style,
+        and everyday living.
       </p>
       <button
         className="offer_card__button"
