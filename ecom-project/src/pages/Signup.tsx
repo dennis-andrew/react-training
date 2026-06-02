@@ -25,16 +25,10 @@ const Signup = () => {
     }
   }, [currentUser, navigate]);
 
-  const submitSignup = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitSignup = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const result = signUp(
-      username,
-      email,
-      password,
-      gender,
-      address,
-    );
+    const result = signUp(username, email, password, gender, address);
 
     if (!result.ok) {
       setMessage(result.message);
@@ -42,7 +36,7 @@ const Signup = () => {
     }
 
     setMessage("Signup successful. Redirecting...");
-    window.setTimeout(() => navigate("/"), 1000);
+    setTimeout(() => navigate("/"), 1000);
   };
 
   return (
